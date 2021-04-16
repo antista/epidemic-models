@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../src/jquery.jqplot.js"></script>
+    <script type="text/javascript" src="../src/plugins/jqplot.canvasTextRenderer.js"></script>
+    <script type="text/javascript" src="../src/plugins/jqplot.canvasAxisLabelRenderer.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/jquery.jqplot.css"/>
+</head>
+<script>
+    $(document).ready(function () {
+        var cosPoints = [];
+        for (var i = 0; i < 2 * Math.PI; i += 0.1) {
+            cosPoints.push([i, Math.cos(i)]);
+        }
+        var plot2 = $.jqplot('chart2', [cosPoints], {
+            series: [{showMarker: false}],
+            axes: {
+                xaxis: {
+                    label: 'Angle (radians)',
+                    labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+                },
+                yaxis: {
+                    label: 'Cosine',
+                    labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+                }
+            }
+        });
+    });
+</script>
+<body>
+
+</body>
+</html>

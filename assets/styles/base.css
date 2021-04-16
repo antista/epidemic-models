@@ -1,0 +1,60 @@
+@font-face {
+    font-family: logoFont;
+    src: url('../fonts/CaviarDreams_Bold.ttf');
+    font-weight: bold;
+}
+
+header {
+    height: 70px;
+    top: 0;
+    background-color: #009B95;
+    color: azure;
+    font-weight: bold;
+    position: sticky;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+}
+
+.logo {
+    width: 100%;
+    box-sizing: border-box;
+    /*border: solid 1px red;*/
+    text-align: center;
+}
+.logo:hover {
+    cursor:pointer;
+}
+
+.logo-text {
+    line-height: 70px;
+    font-size: 30px;
+    font-family: logoFont;
+    text-decoration: none !important;
+    color: inherit !important;
+    text-shadow: 5px 5px 5px #006561;
+
+}
+
+.logo-text {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.logo-text:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.logo-text img {
+    width: 50px;
+    box-shadow: 5px 5px 5px #006561;
+}
+
+.dropdown-item {
+    height: 35px;
+}
+
+.dropdown-item:hover {
+    background-color: #FFB173 !important;
+}
+
