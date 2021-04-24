@@ -21,8 +21,9 @@ header {
     /*border: solid 1px red;*/
     text-align: center;
 }
+
 .logo:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .logo-text {
@@ -57,4 +58,23 @@ header {
 .dropdown-item:hover {
     background-color: #FFB173 !important;
 }
+
+.plot-container {
+    margin-left: 100px;
+    margin-top: 25px;
+}
+
+.plot {
+    height: 600px;
+    width: 1000px;
+    position: relative;
+}
+
+.model-title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 35px;
+    margin-left: 150px;
+}
+
 
