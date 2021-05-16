@@ -78,25 +78,31 @@ header {
     margin-top: 35px;
     margin-left: 150px;
 }
-.form-container{
-    font-size:25px;
-    margin-top:75px;
-    margin-left:90px;
+
+.form-container {
+    font-size: 25px;
+    margin-top: 75px;
+    margin-left: 90px;
 }
+
 td {
     padding-left: 30px !important;
     /*padding-bottom: 20px !important;*/
 }
-.help-text{
-    font-size:17px;
+
+.help-text {
+    font-size: 17px;
     padding-bottom: 20px !important;
 }
-input{
-    width:250px;
+
+input {
+    width: 250px;
 }
-.form-card input[type=submit]{
-    margin-top:20px;
+
+.form-card input[type=submit] {
+    margin-top: 20px;
 }
-.form-card input[type=reset]{
-    margin-top:20px;
+
+.form-card input[type=reset] {
+    margin-top: 20px;
 }

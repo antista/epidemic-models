@@ -33,7 +33,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/jquery.jqplot.css' %}"/>
 </head>
 <body>
-
 <header>
     <div class="content-width-center">
         <div class="row">
@@ -66,6 +65,7 @@
 </header>
 <div id="content">
     <div class="content-width-center">
+        {% include "models.html" %}
         {% block content %}{% endblock %}
     </div>
 </div>
