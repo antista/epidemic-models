@@ -22,4 +22,5 @@ urlpatterns = [
     path('sir/', include(('apps.sir.urls', 'sir'))),
     path('seir/', include(('apps.seir.urls', 'seir'))),
     path('sis/', include(('apps.sis.urls', 'sis'))),
+    path('sird/', include(('apps.sird.urls', 'sird'))),
 ]

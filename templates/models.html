@@ -1,20 +1,76 @@
 <div class="model-title">{{model_name}} model</div>
-<div class="plot-container" id="resizable1">
-    <div class="plot" id="chartdiv"></div>
-    <button id="button-reset" class="btn btn-secondary btn-lg">
-        Zoom out {{N}}
-    </button>
-    <form class="form-card" method="post">
-        <div class="confirm-message">Send offer.</div>
-        {% csrf_token %}
-        <table class="form-table">{{ form.as_table }}</table>
-        <input class="btn btn-lg btn-primary" type="submit" value="Send">
-        <span>
-            <a class="btn btn-secondary btn-lg"
-               href="#"
-               role="button">
-                Cancel
-            </a>
-        </span>
-    </form>
+<div class="content-width-center">
+    <div class="page-container row">
+        <div class="col-6 plot-container" id="resizable1">
+            <div class="plot" id="chartdiv"></div>
+        </div>
+        <div class="col-4 form-container">
+            <form class="form-card" method="post">
+                {% csrf_token %}
+                <table class="form-table">
+                    {% for field in form %}
+                    <tr>
+                        <th>{{ field.label_tag }}</th>
+                        <td>
+                            {{ field }}
+                            {% if field.field.widget.input_type == "range" %}
+                            <span id="range-{{field.name}}">{{field.value}}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td class="help-text">
+                            {{ field.help_text }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <input class="btn btn-lg btn-primary" type="submit" value="Build plot">
+                <input id="button-reset" class="btn btn-secondary btn-lg" type="reset" value="Zoom out">
+            </form>
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    function changeRangeValue() {
+        for (let i = 0; i < elements.length; i++) {
+            let fieldValue = document.getElementById("range-" + elements[i].name)
+            fieldValue.innerHTML = elements[i].value
+        }
+    }
+
+    var elements = $('input[type=range]')
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].onchange = changeRangeValue;
+    }
+    $.jqplot._noToImageButton = true;
+    var options = {
+        seriesDefaults: {
+            rendererOptions: {
+                smooth: true
+            }
+        },
+        axes: {
+            xaxis: {
+                pad: 0,
+                label: 'Days',
+                labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+                // padMax:1.1
+            },
+            yaxis: {
+                pad: 0,
+                padMax: 1.1,
+                label: 'Population',
+                labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+            }
+        },
+        cursor: {
+            show: true,
+            zoom: true
+        },
+    };
+    $('#button-reset').click(function () {
+        plot1.resetZoom()
+    });
+</script>

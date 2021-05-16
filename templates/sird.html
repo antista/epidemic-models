@@ -6,11 +6,12 @@
         let yS = JSON.parse("{{ y_S|escapejs }}");
         let yI = JSON.parse("{{ y_I|escapejs }}");
         let yR = JSON.parse("{{ y_R|escapejs }}");
-        plot1 = $.jqplot('chartdiv', [yS, yI, yR], {
+        let yD = JSON.parse("{{ y_D|escapejs }}");
+        plot1 = $.jqplot('chartdiv', [yS, yI, yR, yD], {
             legend: {
                 show: true,
                 placement: 'insideGrid',
-                labels: ['S', 'I', 'R'],
+                labels: ['S', 'I', 'R', 'D'],
             }, ...options
         });
     });

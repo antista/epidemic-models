@@ -27,52 +27,13 @@
     <script type="text/javascript" src="{% static 'js/plugins/jqplot.dateAxisRenderer.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/plugins/jqplot.canvasTextRenderer.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/plugins/jqplot.canvasAxisTickRenderer.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugins/jqplot.canvasAxisLabelRenderer.js' %}"></script>
     <link rel="stylesheet" type="text/css"
           href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/smoothness/jquery-ui.css"/>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/jquery.jqplot.css' %}"/>
 </head>
 <body>
-<script>
-    $(function () {
-        $.jqplot._noToImageButton = true;
-        var options = {
-            // title: 'Google, Inc.',
-            series: [{
-                label: 'Google, Inc.',
-                neighborThreshold: -1
-            }],
-            axes: {
-                xaxis: {
-                    renderer: $.jqplot.LogAxisRenderer,
-                    // renderer: $.jqplot.DateAxisRenderer,
-                    tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-                    tickOptions: {
-                        angle: -30
-                    }
-                },
-                yaxis: {
-                    renderer: $.jqplot.LogAxisRenderer,
-                    // tickOptions: {prefix: '$'}
-                    tickOptions: $.jqplot.CanvasAxisTickRenderer
-                }
-            },
-            cursor: {
-                show: true,
-                zoom: true
-            }
-        };
-        // $("#resizable1").resizable({delay: 20});
-        // $('#resizable1').bind('resize', function (event, ui) {
-        //     pass in resetAxes: true option to get rid of old ticks and axis properties
-        //     which should be recomputed based on new plot size.
-        // plot1.replot({resetAxes: true});
-        // });
-        plot1 = $.jqplot('chartdiv', [[[1, 2], [3, 5.12], [5, 13.1], [7, 33.6], [9, 85.9], [11, 219.9]], [[1, 5], [4, 5.12], [7, 13.1], [8, 33.6], [9, 85.9], [11, 219.9]]], options);
-        $('#button-reset').click(function () {
-            plot1.resetZoom()
-        });
-    });
-</script>
+
 <header>
     <div class="content-width-center">
         <div class="row">
@@ -90,6 +51,7 @@
                         <a class="dropdown-item" href="{% url 'sir:plot' %}">SIR</a>
                         <a class="dropdown-item" href="{% url 'sis:plot' %}">SIS</a>
                         <a class="dropdown-item" href="{% url 'seir:plot' %}">SEIR</a>
+                        <a class="dropdown-item" href="{% url 'sird:plot' %}">SIRD</a>
                         <a class="dropdown-item" href="#">ONE MORE</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'core:about' %}" title="About epidemic models">
@@ -104,9 +66,9 @@
 </header>
 <div id="content">
     <div class="content-width-center">
-        {% include "models.html" %}
         {% block content %}{% endblock %}
     </div>
 </div>
+
 </body>
 </html>
