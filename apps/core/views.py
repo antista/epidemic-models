@@ -11,6 +11,8 @@ class EpidemicModelView(FormView):
 
     default_form = None
     model_name = None
+    about = None
+    vital = False
 
     def __init__(self, **kwargs):
         """Check default_form is in class attributes."""
@@ -37,6 +39,8 @@ class EpidemicModelView(FormView):
         data = {
             **form.cleaned_data,
             'model_name': self.model_name,
+            'about': self.about,
+            'vital': self.vital,
             'form': form,
         }
         data.update(**kwargs)

@@ -1,4 +1,4 @@
-<div class="model-title">{{model_name}} model</div>
+<div class="model-title">{{model_name}} модель {% if vital %} с жизненной динамикой{% endif %}</div>
 <div class="content-width-center">
     <div class="page-container row">
         <div class="col-6 plot-container" id="resizable1">
@@ -26,11 +26,17 @@
                     </tr>
                     {% endfor %}
                 </table>
-                <input class="btn btn-lg btn-primary" type="submit" value="Build plot">
-                <input id="button-reset" class="btn btn-secondary btn-lg" type="reset" value="Zoom out">
+                <input class="btn btn-lg btn-primary" type="submit" value="Построить">
+                <input id="button-reset" class="btn btn-secondary btn-lg" type="reset" value="Уменьшить">
             </form>
         </div>
     </div>
+    {% if about %}
+    <div class="about-info">
+        <h3 class="about-header">О {{model_name}} модели</h3>
+        {{about}}
+    </div>
+    {% endif %}
 </div>
 <script type="text/javascript">
     function changeRangeValue() {
@@ -46,22 +52,18 @@
     }
     $.jqplot._noToImageButton = true;
     var options = {
-        seriesDefaults: {
-            rendererOptions: {
-                smooth: true
-            }
-        },
+        seriesColors: ["#FF7100", "#33CDC7", "#69B00B", "#E7003E", "#0085cc"],
         axes: {
             xaxis: {
                 pad: 0,
-                label: 'Days',
+                label: 'Дни',
                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
                 // padMax:1.1
             },
             yaxis: {
                 pad: 0,
                 padMax: 1.1,
-                label: 'Population',
+                label: 'Популяция',
                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer
             }
         },

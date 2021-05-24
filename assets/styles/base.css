@@ -73,15 +73,15 @@ header {
 }
 
 .model-title {
-    font-size: 40px;
+    font-size: 35px;
     font-weight: bold;
     margin-top: 35px;
     margin-left: 150px;
 }
 
 .form-container {
-    font-size: 25px;
-    margin-top: 75px;
+    font-size: 20px;
+    margin-top: 35px;
     margin-left: 90px;
 }
 
@@ -91,12 +91,13 @@ td {
 }
 
 .help-text {
-    font-size: 17px;
-    padding-bottom: 20px !important;
+    font-size: 15px;
+    width: 350px;
+    padding-bottom: 10px !important;
 }
 
 input {
-    width: 250px;
+    width: 220px;
 }
 
 .form-card input[type=submit] {
@@ -105,4 +106,10 @@ input {
 
 .form-card input[type=reset] {
     margin-top: 20px;
+}
+
+.about-info {
+    margin-left: 100px;
+    margin-top: 25px;
+    font-size: 18px;
 }

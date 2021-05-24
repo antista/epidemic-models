@@ -3,57 +3,55 @@ from django.urls import reverse_lazy
 
 from apps.core import constants
 from apps.core.views import EpidemicModelView
-from apps.sird.diffs import get_dots
-from apps.sird.forms import SIRDForm, SIRDVForm
+from apps.si.diffs import get_dots
+from apps.si.forms import SIForm, SIVForm
 
-DEFAULT_FORM = SIRDForm({
+DEFAULT_FORM = SIForm({
     'N': constants.DEFAULT_POPULATION,
     'days': constants.DEFAULT_DAYS,
     'beta': constants.DEFAULT_BETA,
-    'gamma': constants.DEFAULT_GAMMA,
-    'mu': constants.DEFAULT_MU,
 })
-DEFAULT_VITAL_FORM = SIRDVForm({
+DEFAULT_VITAL_FORM = SIVForm({
     'N': constants.DEFAULT_POPULATION,
     'days': constants.DEFAULT_DAYS,
     'beta': constants.DEFAULT_BETA,
-    'gamma': constants.DEFAULT_GAMMA,
-    'mu': constants.DEFAULT_MU,
     'birth': constants.DEFAULT_BIRTH,
     'death': constants.DEFAULT_DEATH,
 })
 
 
-class SIRDView(EpidemicModelView):
-    template_name = 'sird.html'
-    form_class = SIRDForm
-    success_url = reverse_lazy('sird:plot')
+class SIView(EpidemicModelView):
+    template_name = 'si.html'
+    form_class = SIForm
+    success_url = reverse_lazy('si:plot')
     default_form = DEFAULT_FORM
-    model_name = 'SIRD'
+    model_name = 'SI'
+    about = 'fbvehbvishe'
 
     def _get_response_data(self, request, form):
         form.get_prepared_form()
-        y_S, y_I, y_R, y_D = get_dots(form)
+        y_S, y_I = get_dots(form)
         return render(
             request,
             self.template_name,
-            self.get_context_dict(form, y_S=y_S, y_I=y_I, y_R=y_R, y_D=y_D),
+            self.get_context_dict(form, y_S=y_S, y_I=y_I),
         )
 
 
-class SIRDVView(EpidemicModelView):
-    template_name = 'sird.html'
-    form_class = SIRDVForm
-    success_url = reverse_lazy('sird:vital')
+class SIVView(EpidemicModelView):
+    template_name = 'si.html'
+    form_class = SIVForm
+    success_url = reverse_lazy('si:vital')
     default_form = DEFAULT_VITAL_FORM
-    model_name = 'SIRD'
+    model_name = 'SI'
     vital = True
+    about = 'fbvehbvishe'
 
     def _get_response_data(self, request, form):
         form.get_prepared_form()
-        y_S, y_I, y_R, y_D = get_dots(form, True)
+        y_S, y_I = get_dots(form, True)
         return render(
             request,
             self.template_name,
-            self.get_context_dict(form, y_S=y_S, y_I=y_I, y_R=y_R, y_D=y_D),
+            self.get_context_dict(form, y_S=y_S, y_I=y_I),
         )

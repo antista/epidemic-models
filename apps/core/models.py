@@ -7,6 +7,9 @@ class Coefficients:
     gamma: float = None
     mu: float = None
     alpha: float = None
+    ksi: float = None
+    birth: float = None
+    death: float = None
 
 
 @dataclass

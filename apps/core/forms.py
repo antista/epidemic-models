@@ -4,14 +4,14 @@ from django import forms
 
 FIELDS = {
     'N': forms.IntegerField(
-        label='Population',
+        label='Популяция',
         help_text='Number of population',
         min_value=100,
         max_value=8000000000,
         widget=forms.NumberInput(attrs={'step': 100}),
     ),
     'days': forms.IntegerField(
-        label='Days',
+        label='Дни',
         help_text='Number of days to model',
         min_value=10,
         max_value=500,
@@ -50,26 +50,26 @@ class CoefficientField(forms.DecimalField):
 
 class EpidemicForm(forms.Form):
     N = forms.IntegerField(
-        label='Population',
-        help_text='Number of population',
+        label='Популяция',
+        help_text='Число людей в популяции',
         min_value=100,
         max_value=8000000000,
         widget=forms.NumberInput(attrs={'step': 100}),
     )
     days = forms.IntegerField(
-        label='Days',
-        help_text='Number of days to model',
+        label='Дни',
+        help_text='Количество дней для моделирования',
         min_value=10,
         max_value=500,
         widget=forms.NumberInput(attrs={'step': 1}),
     )
     beta = CoefficientField(
         label='β',
-        help_text='Spreading coefficient (beta)',
+        help_text='Коэффициент распространения (beta)',
     )
     gamma = CoefficientField(
         label='γ',
-        help_text='Recovery coefficient (gamma)',
+        help_text='Коэффициент выздоровления (gamma)',
     )
 
     def get_prepared_form(self):
@@ -78,3 +78,14 @@ class EpidemicForm(forms.Form):
             if type(f_v) == Decimal:
                 f_v = float(f_v)
             self.__setattr__(f_n, f_v)
+
+
+class EpidemicVitalForm(EpidemicForm):
+    birth = CoefficientField(
+        label='Рождаемость',
+        help_text='Коэффициент рождаемости популяции, умноженный на 100',
+    )
+    death = CoefficientField(
+        label='Смертность',
+        help_text='Коэффициент смертности популяции, умноженный на 100',
+    )
