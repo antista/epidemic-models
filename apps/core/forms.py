@@ -60,7 +60,7 @@ class EpidemicForm(forms.Form):
         label='Дни',
         help_text='Количество дней для моделирования',
         min_value=10,
-        max_value=500,
+        max_value=5000,
         widget=forms.NumberInput(attrs={'step': 1}),
     )
     beta = CoefficientField(
@@ -71,6 +71,14 @@ class EpidemicForm(forms.Form):
         label='γ',
         help_text='Коэффициент выздоровления (gamma)',
     )
+    birth = CoefficientField(
+        label='Рождаемость',
+        help_text='Коэффициент рождаемости популяции, умноженный на 100',
+    )
+    death = CoefficientField(
+        label='Смертность',
+        help_text='Коэффициент смертности популяции, умноженный на 100',
+    )
 
     def get_prepared_form(self):
         self.is_valid()
@@ -80,12 +88,4 @@ class EpidemicForm(forms.Form):
             self.__setattr__(f_n, f_v)
 
 
-class EpidemicVitalForm(EpidemicForm):
-    birth = CoefficientField(
-        label='Рождаемость',
-        help_text='Коэффициент рождаемости популяции, умноженный на 100',
-    )
-    death = CoefficientField(
-        label='Смертность',
-        help_text='Коэффициент смертности популяции, умноженный на 100',
-    )
+# class EpidemicVitalForm(EpidemicForm):

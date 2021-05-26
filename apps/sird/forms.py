@@ -1,4 +1,4 @@
-from apps.core.forms import EpidemicForm, CoefficientField, EpidemicVitalForm
+from apps.core.forms import EpidemicForm, CoefficientField
 
 
 class SIRDForm(EpidemicForm):
@@ -6,7 +6,4 @@ class SIRDForm(EpidemicForm):
         label='μ',
         help_text='Коэффициент смертности (mu)',
     )
-
-
-class SIRDVForm(EpidemicVitalForm, SIRDForm):
-    pass
+    field_order = ['N', 'days', 'beta', 'gamma', 'mu', 'birth', 'death']

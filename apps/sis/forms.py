@@ -1,9 +1,5 @@
-from apps.core.forms import EpidemicForm, EpidemicVitalForm
+from apps.core.forms import EpidemicForm
 
 
 class SISForm(EpidemicForm):
-    pass
-
-
-class SISVForm(EpidemicVitalForm, SISForm):
     pass

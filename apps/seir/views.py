@@ -4,16 +4,9 @@ from django.urls import reverse_lazy
 from apps.core import constants
 from apps.core.views import EpidemicModelView
 from apps.seir.diffs import get_dots
-from apps.seir.forms import SEIRForm, SEIRVForm
+from apps.seir.forms import SEIRForm
 
 DEFAULT_FORM = SEIRForm({
-    'N': constants.DEFAULT_POPULATION,
-    'days': constants.DEFAULT_DAYS,
-    'beta': constants.DEFAULT_BETA,
-    'gamma': constants.DEFAULT_GAMMA,
-    'alpha': constants.DEFAULT_ALPHA,
-})
-DEFAULT_VITAL_FORM = SEIRVForm({
     'N': constants.DEFAULT_POPULATION,
     'days': constants.DEFAULT_DAYS,
     'beta': constants.DEFAULT_BETA,
@@ -41,12 +34,8 @@ class SEIRView(EpidemicModelView):
         )
 
 
-class SEIRVView(EpidemicModelView):
-    template_name = 'seir.html'
-    form_class = SEIRVForm
+class SEIRVView(SEIRView):
     success_url = reverse_lazy('seir:vital')
-    default_form = DEFAULT_VITAL_FORM
-    model_name = 'SEIR'
     vital = True
 
     def _get_response_data(self, request, form):

@@ -1,4 +1,4 @@
-from apps.core.forms import EpidemicForm, EpidemicVitalForm
+from apps.core.forms import EpidemicForm
 
 
 class SIForm(EpidemicForm):
@@ -7,5 +7,5 @@ class SIForm(EpidemicForm):
         del self.fields['gamma']
 
 
-class SIVForm(EpidemicVitalForm, SIForm):
-    pass
+# class SIVForm(EpidemicVitalForm, SIForm):
+#     pass

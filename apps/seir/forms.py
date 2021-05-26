@@ -1,4 +1,4 @@
-from apps.core.forms import EpidemicForm, CoefficientField, EpidemicVitalForm
+from apps.core.forms import EpidemicForm, CoefficientField
 
 
 class SEIRForm(EpidemicForm):
@@ -6,7 +6,4 @@ class SEIRForm(EpidemicForm):
         label='α',
         help_text='Коэффициент инкубационного периода (alpha)',
     )
-
-
-class SEIRVForm(EpidemicVitalForm, SEIRForm):
-    pass
+    field_order = ['N', 'days', 'beta', 'gamma', 'alpha', 'birth', 'death']

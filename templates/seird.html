@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "models.html" %}
+<script type="text/javascript">
+    $(function () {
+        let yS = JSON.parse("{{ y_S|escapejs }}");
+        let yE = JSON.parse("{{ y_E|escapejs }}");
+        let yI = JSON.parse("{{ y_I|escapejs }}");
+        let yR = JSON.parse("{{ y_R|escapejs }}");
+        let yD = JSON.parse("{{ y_D|escapejs }}");
+        plot1 = $.jqplot('chartdiv', [yS, yI, yR, yD, yE], {
+            legend: {
+                show: true,
+                placement: 'insideGrid',
+                labels: ['Восприимчивые (S)', 'Инфицированные (I)', 'Выздоровевшие (R)', 'Умершие (D)', 'Зараженные (E)'],
+            }, ...options
+        });
+    });
+</script>
+{% endblock content %}

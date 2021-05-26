@@ -4,16 +4,9 @@ from django.urls import reverse_lazy
 from apps.core import constants
 from apps.core.views import EpidemicModelView
 from apps.sird.diffs import get_dots
-from apps.sird.forms import SIRDForm, SIRDVForm
+from apps.sird.forms import SIRDForm
 
 DEFAULT_FORM = SIRDForm({
-    'N': constants.DEFAULT_POPULATION,
-    'days': constants.DEFAULT_DAYS,
-    'beta': constants.DEFAULT_BETA,
-    'gamma': constants.DEFAULT_GAMMA,
-    'mu': constants.DEFAULT_MU,
-})
-DEFAULT_VITAL_FORM = SIRDVForm({
     'N': constants.DEFAULT_POPULATION,
     'days': constants.DEFAULT_DAYS,
     'beta': constants.DEFAULT_BETA,
@@ -41,12 +34,8 @@ class SIRDView(EpidemicModelView):
         )
 
 
-class SIRDVView(EpidemicModelView):
-    template_name = 'sird.html'
-    form_class = SIRDVForm
+class SIRDVView(SIRDView):
     success_url = reverse_lazy('sird:vital')
-    default_form = DEFAULT_VITAL_FORM
-    model_name = 'SIRD'
     vital = True
 
     def _get_response_data(self, request, form):

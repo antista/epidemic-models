@@ -4,14 +4,9 @@ from django.urls import reverse_lazy
 from apps.core import constants
 from apps.core.views import EpidemicModelView
 from apps.si.diffs import get_dots
-from apps.si.forms import SIForm, SIVForm
+from apps.si.forms import SIForm
 
 DEFAULT_FORM = SIForm({
-    'N': constants.DEFAULT_POPULATION,
-    'days': constants.DEFAULT_DAYS,
-    'beta': constants.DEFAULT_BETA,
-})
-DEFAULT_VITAL_FORM = SIVForm({
     'N': constants.DEFAULT_POPULATION,
     'days': constants.DEFAULT_DAYS,
     'beta': constants.DEFAULT_BETA,
@@ -38,12 +33,8 @@ class SIView(EpidemicModelView):
         )
 
 
-class SIVView(EpidemicModelView):
-    template_name = 'si.html'
-    form_class = SIVForm
+class SIVView(SIView):
     success_url = reverse_lazy('si:vital')
-    default_form = DEFAULT_VITAL_FORM
-    model_name = 'SI'
     vital = True
     about = 'fbvehbvishe'
 

@@ -38,18 +38,13 @@
         <div class="row">
             <div class="col-1"></div>
             <div class="col-3 logo">
-                <div class="logo-text">
-                    <img src="{% static 'images/scatter-graph.png'%}" alt="scatter"> Epidemic simulator
-                </div>
-            </div>
-            <div class="col-2 logo">
                 <div class="dropdown">
-                    <div class="dropdown-toggle"
+                    <div class="dropdown-toggle logo-text"
                          id="dropdownMenuButton"
                          data-toggle="dropdown"
                          aria-haspopup="true"
                          aria-expanded="false">
-                        Модели без жизненной динамики
+                        <img src="{% static 'images/scatter-graph.png'%}" alt="scatter"> Epidemic simulator
                     </div>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{% url 'sir:plot' %}">SIR</a>
@@ -58,34 +53,10 @@
                         <a class="dropdown-item" href="{% url 'seir:plot' %}">SEIR</a>
                         <a class="dropdown-item" href="{% url 'seirs:plot' %}">SEIRS</a>
                         <a class="dropdown-item" href="{% url 'sird:plot' %}">SIRD</a>
-                        <a class="dropdown-item" href="#">ONE MORE</a>
+                        <a class="dropdown-item" href="{% url 'seird:plot' %}">SEIRD</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'core:about' %}" title="About epidemic models">
-                            About epidemic models
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2 logo">
-                <div class="dropdown">
-                    <div class="dropdown-toggle"
-                         id="dropdownMenuButton"
-                         data-toggle="dropdown"
-                         aria-haspopup="true"
-                         aria-expanded="false">
-                        Модели с жизненной динамикой
-                    </div>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{% url 'sir:vital' %}">SIR</a>
-                        <a class="dropdown-item" href="{% url 'si:vital' %}">SI</a>
-                        <a class="dropdown-item" href="{% url 'sis:vital' %}">SIS</a>
-                        <a class="dropdown-item" href="{% url 'seir:vital' %}">SEIR</a>
-                        <a class="dropdown-item" href="{% url 'seirs:vital' %}">SEIRS</a>
-                        <a class="dropdown-item" href="{% url 'sird:vital' %}">SIRD</a>
-                        <a class="dropdown-item" href="#">ONE MORE</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'core:about' %}" title="About epidemic models">
-                            About epidemic models
+                        <a class="dropdown-item" href="{% url 'core:about' %}">
+                            Об эпидемиологических моделях
                         </a>
                     </div>
                 </div>

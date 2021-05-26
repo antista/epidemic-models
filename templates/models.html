@@ -1,24 +1,43 @@
-<div class="model-title">{{model_name}} модель {% if vital %} с жизненной динамикой{% endif %}</div>
+<div class="model-title">
+    {{model_name}} модель {% if vital %} с жизненной динамикой{% endif %}
+</div>
 <div class="content-width-center">
     <div class="page-container row">
         <div class="col-6 plot-container" id="resizable1">
             <div class="plot" id="chartdiv"></div>
         </div>
         <div class="col-4 form-container">
+
+            <div class="vital-checkbox">
+                <label class="switch-label" for="from-vital">
+                        <span class="switch">
+                            {% if vital %}
+                            <input id='from-vital' type="checkbox" checked onclick="hide_vital()"/>
+                            {% else %}
+                            <input id='from-vital' type="checkbox" onclick="show_vital()"/>
+                            {% endif %}
+                            <span class="slider round"></span>
+                        </span>
+                    <span class="slider-desc">Строить с жизненной динамикой</span>
+                </label>
+            </div>
             <form class="form-card" method="post">
                 {% csrf_token %}
                 <table class="form-table">
                     {% for field in form %}
-                    <tr>
+                    <tr id="table-{{field.name}}">
                         <th>{{ field.label_tag }}</th>
                         <td>
                             {{ field }}
                             {% if field.field.widget.input_type == "range" %}
-                            <span id="range-{{field.name}}">{{field.value}}</span>
+                            <span class="input-range">
+                                <input id="input-{{field.name}}" class="number-for-range" type="number" step="0.005"
+                                       max=1 min=0 value={{field.value}}>
+                            </span>
                             {% endif %}
                         </td>
                     </tr>
-                    <tr>
+                    <tr id="help-{{field.name}}">
                         <th></th>
                         <td class="help-text">
                             {{ field.help_text }}
@@ -39,18 +58,45 @@
     {% endif %}
 </div>
 <script type="text/javascript">
+    function hide_vital() {
+        postForm = document.getElementsByTagName('form')[0]
+        postForm.action = './'
+        postForm.submit()
+    }
+    function show_vital() {
+        postForm = document.getElementsByTagName('form')[0]
+        postForm.action = 'vital'
+        postForm.submit()
+    }
     function changeRangeValue() {
-        for (let i = 0; i < elements.length; i++) {
-            let fieldValue = document.getElementById("range-" + elements[i].name)
-            fieldValue.innerHTML = elements[i].value
+        for (let i = 0; i < rangeElements.length; i++) {
+            let inputValue = document.getElementById("input-" + rangeElements[i].name)
+            inputValue.value = rangeElements[i].value
         }
     }
 
-    var elements = $('input[type=range]')
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].onchange = changeRangeValue;
+    function changeNumberValue() {
+        for (let i = 0; i < inputNumberElements.length; i++) {
+            let fieldValue = rangeElements[i]
+            fieldValue.value = inputNumberElements[i].value
+        }
+    }
+
+    let rangeElements = $('input[type=range]')
+    for (let i = 0; i < rangeElements.length; i++) {
+        rangeElements[i].onchange = changeRangeValue;
+    }
+    let inputNumberElements = $('input[class=number-for-range]')
+    for (let i = 0; i < inputNumberElements.length; i++) {
+        inputNumberElements[i].onchange = changeNumberValue;
     }
     $.jqplot._noToImageButton = true;
+    if ('{{vital}}'=='False'){
+        document.getElementById('table-birth').style.display="none"
+        document.getElementById('help-birth').style.display="none"
+        document.getElementById('table-death').style.display="none"
+        document.getElementById('help-death').style.display="none"
+    }
     var options = {
         seriesColors: ["#FF7100", "#33CDC7", "#69B00B", "#E7003E", "#0085cc"],
         axes: {

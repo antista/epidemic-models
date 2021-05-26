@@ -1,14 +1,14 @@
 from apps.core.forms import EpidemicForm, CoefficientField
 
 
-class SEIRSForm(EpidemicForm):
+class SEIRDForm(EpidemicForm):
     alpha = CoefficientField(
         label='α',
         help_text='Коэффициент инкубационного периода (alpha)',
     )
-    ksi = CoefficientField(
-        label='ξ',
-        help_text='Скорость потери иммунитета (ksi)',
+    mu = CoefficientField(
+        label='μ',
+        help_text='Коэффициент смертности (mu)',
     )
     field_order = [
         'N',
@@ -16,7 +16,7 @@ class SEIRSForm(EpidemicForm):
         'beta',
         'gamma',
         'alpha',
-        'ksi',
+        'mu',
         'birth',
         'death',
     ]
