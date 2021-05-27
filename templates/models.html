@@ -3,11 +3,19 @@
 </div>
 <div class="content-width-center">
     <div class="page-container row">
-        <div class="col-6 plot-container" id="resizable1">
-            <div class="plot" id="chartdiv"></div>
+        <div class="col-6 plot-container">
+            <div id="resizable1">
+                <div class="plot" id="chartdiv"></div>
+            </div>
+
+            {% if about %}
+            <div class="about-info">
+                <h3 class="about-header">О {{model_name}} модели</h3>
+                {{about}}
+            </div>
+            {% endif %}
         </div>
         <div class="col-4 form-container">
-
             <div class="vital-checkbox">
                 <label class="switch-label" for="from-vital">
                         <span class="switch">
@@ -28,7 +36,11 @@
                     <tr id="table-{{field.name}}">
                         <th>{{ field.label_tag }}</th>
                         <td>
+                            {% if field.field.widget.attrs.readonly %}
+                            <span id="brn-value">{{ field.value }}</span>
+                            {% else %}
                             {{ field }}
+                            {% endif %}
                             {% if field.field.widget.input_type == "range" %}
                             <span class="input-range">
                                 <input id="input-{{field.name}}" class="number-for-range" type="number" step="0.005"
@@ -50,12 +62,6 @@
             </form>
         </div>
     </div>
-    {% if about %}
-    <div class="about-info">
-        <h3 class="about-header">О {{model_name}} модели</h3>
-        {{about}}
-    </div>
-    {% endif %}
 </div>
 <script type="text/javascript">
     function hide_vital() {
@@ -63,15 +69,18 @@
         postForm.action = './'
         postForm.submit()
     }
+
     function show_vital() {
         postForm = document.getElementsByTagName('form')[0]
         postForm.action = 'vital'
         postForm.submit()
     }
+
     function changeRangeValue() {
         for (let i = 0; i < rangeElements.length; i++) {
             let inputValue = document.getElementById("input-" + rangeElements[i].name)
             inputValue.value = rangeElements[i].value
+            updateBrn()
         }
     }
 
@@ -79,9 +88,19 @@
         for (let i = 0; i < inputNumberElements.length; i++) {
             let fieldValue = rangeElements[i]
             fieldValue.value = inputNumberElements[i].value
+            updateBrn()
         }
     }
 
+    function updateBrn() {
+        let betaValue = document.getElementById("input-beta")
+        let gammaValue = document.getElementById("input-gamma")
+        let brnValue = document.getElementById("brn-value")
+        if (brnValue)
+            brnValue.innerText = (betaValue.value / gammaValue.value).toFixed(3).toString()
+    }
+
+    updateBrn()
     let rangeElements = $('input[type=range]')
     for (let i = 0; i < rangeElements.length; i++) {
         rangeElements[i].onchange = changeRangeValue;
@@ -91,14 +110,15 @@
         inputNumberElements[i].onchange = changeNumberValue;
     }
     $.jqplot._noToImageButton = true;
-    if ('{{vital}}'=='False'){
-        document.getElementById('table-birth').style.display="none"
-        document.getElementById('help-birth').style.display="none"
-        document.getElementById('table-death').style.display="none"
-        document.getElementById('help-death').style.display="none"
+    if ('{{vital}}' == 'False') {
+        document.getElementById('table-birth').style.display = "none"
+        document.getElementById('help-birth').style.display = "none"
+        document.getElementById('table-death').style.display = "none"
+        document.getElementById('help-death').style.display = "none"
     }
     var options = {
-        seriesColors: ["#FF7100", "#33CDC7", "#69B00B", "#E7003E", "#0085cc"],
+        seriesColors: ["#33CDC7", "#E7003E", "#69b00b", "#FF7100",
+            "#0085cc"],
         axes: {
             xaxis: {
                 pad: 0,

@@ -1,9 +1,5 @@
-from apps.core.forms import EpidemicForm
+from apps.core import forms as f
 
 
-class SIRForm(EpidemicForm):
+class SIRForm(f.VitalForm, f.GammaForm, f.BetaForm):
     pass
-
-
-# class SIRVForm(EpidemicVitalForm, SIRForm):
-#     pass

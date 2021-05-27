@@ -116,11 +116,6 @@ input {
     margin-top: 20px;
 }
 
-.about-info {
-    margin-left: 100px;
-    margin-top: 25px;
-    font-size: 18px;
-}
 
 .vital-checkbox input {
     width: 50px;
@@ -199,18 +194,27 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
-.number-for-range{
-    width:80px !important;
+
+.number-for-range {
+    width: 80px !important;
 }
-.about{
+
+.about {
     font-size: 20px;
     margin-top: 40px;
     margin-left: 130px;
     margin-right: 130px;
 }
-.about-header{
-    font-size: 35px;
+
+.about-info {
+    margin-left: 10px;
+    margin-top: 25px;
+    font-size: 18px;
+}
+
+.about-header {
+    font-size: 30px;
     font-weight: bold;
     margin-top: 50px;
-    margin-left: 150px;
+    margin-left: 30px;
 }

@@ -2,40 +2,6 @@ from decimal import Decimal
 
 from django import forms
 
-FIELDS = {
-    'N': forms.IntegerField(
-        label='Популяция',
-        help_text='Number of population',
-        min_value=100,
-        max_value=8000000000,
-        widget=forms.NumberInput(attrs={'step': 100}),
-    ),
-    'days': forms.IntegerField(
-        label='Дни',
-        help_text='Number of days to model',
-        min_value=10,
-        max_value=500,
-        widget=forms.NumberInput(attrs={'step': 1}),
-    ),
-    'beta': forms.DecimalField(
-        label='β',
-        help_text='Spreading coefficient (beta)',
-        min_value=0,
-        max_value=1,
-        decimal_places=3,
-        widget=forms.NumberInput(attrs={'type': 'range', 'step': 0.005}),
-    ),
-    'gamma': forms.DecimalField(
-        label='γ',
-        help_text='Healing coefficient (gamma)',
-        min_value=0,
-        max_value=1,
-        decimal_places=3,
-        widget=forms.NumberInput(
-            attrs={'a': 1, 'type': 'range', 'step': 0.005}),
-    )
-}
-
 
 class CoefficientField(forms.DecimalField):
     def __init__(self, **kwargs):
@@ -63,22 +29,6 @@ class EpidemicForm(forms.Form):
         max_value=5000,
         widget=forms.NumberInput(attrs={'step': 1}),
     )
-    beta = CoefficientField(
-        label='β',
-        help_text='Коэффициент распространения (beta)',
-    )
-    gamma = CoefficientField(
-        label='γ',
-        help_text='Коэффициент выздоровления (gamma)',
-    )
-    birth = CoefficientField(
-        label='Рождаемость',
-        help_text='Коэффициент рождаемости популяции, умноженный на 100',
-    )
-    death = CoefficientField(
-        label='Смертность',
-        help_text='Коэффициент смертности популяции, умноженный на 100',
-    )
 
     def get_prepared_form(self):
         self.is_valid()
@@ -88,4 +38,52 @@ class EpidemicForm(forms.Form):
             self.__setattr__(f_n, f_v)
 
 
-# class EpidemicVitalForm(EpidemicForm):
+class VitalForm(EpidemicForm):
+    birth = CoefficientField(
+        label='Рождаемость',
+        help_text='Коэффициент рождаемости популяции, умноженный на 100',
+    )
+    death = CoefficientField(
+        label='Смертность',
+        help_text='Коэффициент смертности популяции, умноженный на 100',
+    )
+
+
+class BetaForm(EpidemicForm):
+    beta = CoefficientField(
+        label='β',
+        help_text='Коэффициент интенсивности контактов',
+    )
+
+
+class GammaForm(EpidemicForm):
+    gamma = CoefficientField(
+        label='γ',
+        help_text='Коэффициент выздоровления',
+    )
+    basic_reproduction_number = forms.DecimalField(
+        label='R0',
+        help_text='Базовое репродуктивное число (β/γ)',
+        widget=forms.NumberInput(attrs={'readonly': True}),
+    )
+
+
+class KsiForm(EpidemicForm):
+    ksi = CoefficientField(
+        label='ξ',
+        help_text='Скорость потери иммунитета',
+    )
+
+
+class AlphaForm(EpidemicForm):
+    alpha = CoefficientField(
+        label='α',
+        help_text='Коэффициент инкубационного периода',
+    )
+
+
+class MuForm(EpidemicForm):
+    mu = CoefficientField(
+        label='μ',
+        help_text='Коэффициент смертности',
+    )

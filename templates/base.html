@@ -48,6 +48,7 @@
                     </div>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{% url 'sir:plot' %}">SIR</a>
+                        <a class="dropdown-item" href="{% url 'sirs:plot' %}">SIRS</a>
                         <a class="dropdown-item" href="{% url 'si:plot' %}">SI</a>
                         <a class="dropdown-item" href="{% url 'sis:plot' %}">SIS</a>
                         <a class="dropdown-item" href="{% url 'seir:plot' %}">SEIR</a>
@@ -69,6 +70,5 @@
         {% block content %}{% endblock %}
     </div>
 </div>
-
 </body>
 </html>

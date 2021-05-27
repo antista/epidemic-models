@@ -1,11 +1,5 @@
-from apps.core.forms import EpidemicForm
+from apps.core import forms as f
 
 
-class SIForm(EpidemicForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        del self.fields['gamma']
-
-
-# class SIVForm(EpidemicVitalForm, SIForm):
-#     pass
+class SIForm(f.VitalForm, f.BetaForm):
+    pass

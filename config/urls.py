@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('apps.core.urls', 'core'))),
     path('sir/', include(('apps.sir.urls', 'sir'))),
+    path('sirs/', include(('apps.sirs.urls', 'sirs'))),
     path('seir/', include(('apps.seir.urls', 'seir'))),
     path('seirs/', include(('apps.seirs.urls', 'seirs'))),
     path('si/', include(('apps.si.urls', 'si'))),

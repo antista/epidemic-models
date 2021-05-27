@@ -1,22 +1,5 @@
-from apps.core.forms import EpidemicForm, CoefficientField
+from apps.core import forms as f
 
 
-class SEIRDForm(EpidemicForm):
-    alpha = CoefficientField(
-        label='α',
-        help_text='Коэффициент инкубационного периода (alpha)',
-    )
-    mu = CoefficientField(
-        label='μ',
-        help_text='Коэффициент смертности (mu)',
-    )
-    field_order = [
-        'N',
-        'days',
-        'beta',
-        'gamma',
-        'alpha',
-        'mu',
-        'birth',
-        'death',
-    ]
+class SEIRDForm(f.VitalForm, f.MuForm, f.AlphaForm, f.GammaForm, f.BetaForm):
+    pass

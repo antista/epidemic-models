@@ -1,5 +1,5 @@
-from apps.core.forms import EpidemicForm
+from apps.core import forms as f
 
 
-class SISForm(EpidemicForm):
+class SISForm(f.VitalForm, f.GammaForm, f.BetaForm):
     pass
