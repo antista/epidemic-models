@@ -52,7 +52,7 @@ class VitalForm(EpidemicForm):
 class BetaForm(EpidemicForm):
     beta = CoefficientField(
         label='β',
-        help_text='Коэффициент интенсивности контактов',
+        help_text='Коэффициент передачи инфекции',
     )
 
 
@@ -60,11 +60,6 @@ class GammaForm(EpidemicForm):
     gamma = CoefficientField(
         label='γ',
         help_text='Коэффициент выздоровления',
-    )
-    basic_reproduction_number = forms.DecimalField(
-        label='R0',
-        help_text='Базовое репродуктивное число (β/γ)',
-        widget=forms.NumberInput(attrs={'readonly': True}),
     )
 
 

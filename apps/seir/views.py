@@ -18,15 +18,16 @@ DEFAULT_FORM = SEIRForm({
 
 
 class SEIRView(EpidemicModelView):
-    template_name = 'seir.html'
+    template_name = 'models/seir.html'
     form_class = SEIRForm
     success_url = reverse_lazy('seir:plot')
     default_form = DEFAULT_FORM
     model_name = 'SEIR'
+    about = 'about/seir.html'
 
     def _get_response_data(self, request, form):
         form.get_prepared_form()
-        y_S, y_I, y_R, y_E = get_dots(form)
+        y_S, y_I, y_R, y_E = self._prepare_plot_data(form.days, get_dots(form))
         return render(
             request,
             self.template_name,
@@ -40,7 +41,10 @@ class SEIRVView(SEIRView):
 
     def _get_response_data(self, request, form):
         form.get_prepared_form()
-        y_S, y_I, y_R, y_E = get_dots(form, True)
+        y_S, y_I, y_R, y_E = self._prepare_plot_data(
+            form.days,
+            get_dots(form, True),
+        )
         return render(
             request,
             self.template_name,

@@ -11,7 +11,7 @@
             {% if about %}
             <div class="about-info">
                 <h3 class="about-header">О {{model_name}} модели</h3>
-                {{about}}
+                {% include about %}
             </div>
             {% endif %}
         </div>
@@ -36,11 +36,7 @@
                     <tr id="table-{{field.name}}">
                         <th>{{ field.label_tag }}</th>
                         <td>
-                            {% if field.field.widget.attrs.readonly %}
-                            <span id="brn-value">{{ field.value }}</span>
-                            {% else %}
                             {{ field }}
-                            {% endif %}
                             {% if field.field.widget.input_type == "range" %}
                             <span class="input-range">
                                 <input id="input-{{field.name}}" class="number-for-range" type="number" step="0.005"
@@ -80,7 +76,7 @@
         for (let i = 0; i < rangeElements.length; i++) {
             let inputValue = document.getElementById("input-" + rangeElements[i].name)
             inputValue.value = rangeElements[i].value
-            updateBrn()
+            // updateBrn()
         }
     }
 
@@ -88,19 +84,19 @@
         for (let i = 0; i < inputNumberElements.length; i++) {
             let fieldValue = rangeElements[i]
             fieldValue.value = inputNumberElements[i].value
-            updateBrn()
+            // updateBrn()
         }
     }
 
-    function updateBrn() {
-        let betaValue = document.getElementById("input-beta")
-        let gammaValue = document.getElementById("input-gamma")
-        let brnValue = document.getElementById("brn-value")
-        if (brnValue)
-            brnValue.innerText = (betaValue.value / gammaValue.value).toFixed(3).toString()
-    }
-
-    updateBrn()
+    // function updateBrn() {
+    //     let betaValue = document.getElementById("input-beta")
+    //     let gammaValue = document.getElementById("input-gamma")
+    //     let brnValue = document.getElementById("brn-value")
+    //     if (brnValue)
+    //         brnValue.innerText = (betaValue.value / gammaValue.value).toFixed(3).toString()
+    // }
+    //
+    // updateBrn()
     let rangeElements = $('input[type=range]')
     for (let i = 0; i < rangeElements.length; i++) {
         rangeElements[i].onchange = changeRangeValue;

@@ -3,28 +3,29 @@ from django.urls import reverse_lazy
 
 from apps.core import constants
 from apps.core.views import EpidemicModelView
-from apps.seird.diffs import get_dots
-from apps.seird.forms import SEIRDForm
+from apps.seirds.diffs import get_dots
+from apps.seirds.forms import SEIRDSForm
 
-DEFAULT_FORM = SEIRDForm({
+DEFAULT_FORM = SEIRDSForm({
     'N': constants.DEFAULT_POPULATION,
     'days': constants.DEFAULT_DAYS,
     'beta': constants.DEFAULT_BETA,
     'gamma': constants.DEFAULT_GAMMA,
     'alpha': constants.DEFAULT_ALPHA,
     'mu': constants.DEFAULT_MU,
+    'ksi': constants.DEFAULT_KSI,
     'birth': constants.DEFAULT_BIRTH,
     'death': constants.DEFAULT_DEATH,
 })
 
 
-class SEIRDView(EpidemicModelView):
+class SEIRDSView(EpidemicModelView):
     template_name = 'models/seird.html'
-    form_class = SEIRDForm
-    success_url = reverse_lazy('seird:plot')
+    form_class = SEIRDSForm
+    success_url = reverse_lazy('seirds:plot')
     default_form = DEFAULT_FORM
-    model_name = 'SEIRD'
-    about = 'about/seird.html'
+    model_name = 'SEIRDS'
+    about = 'about/seirds.html'
 
     def _get_response_data(self, request, form):
         form.get_prepared_form()
@@ -46,8 +47,8 @@ class SEIRDView(EpidemicModelView):
         )
 
 
-class SEIRDVView(SEIRDView):
-    success_url = reverse_lazy('seird:vital')
+class SEIRDSVView(SEIRDSView):
+    success_url = reverse_lazy('seirds:vital')
     vital = True
 
     def _get_response_data(self, request, form):

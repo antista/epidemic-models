@@ -46,6 +46,12 @@ class EpidemicModelView(FormView):
         data.update(**kwargs)
         return data
 
+    def _prepare_plot_data(self, days, plots):
+        result = []
+        for plot in plots:
+            result.append([list(a) for a in zip(range(days), plot)])
+        return result
+
     # def get(self, request, **kwargs):
     #     """Fill initial form and add values to template."""
     #     return render(

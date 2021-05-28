@@ -17,16 +17,16 @@ DEFAULT_FORM = SISForm({
 
 
 class SISView(EpidemicModelView):
-    template_name = 'sis.html'
+    template_name = 'models/si.html'
     form_class = SISForm
     success_url = reverse_lazy('sis:plot')
     default_form = DEFAULT_FORM
     model_name = 'SIS'
-    about = 'fbvehbvishe'
+    about = 'about/sis.html'
 
     def _get_response_data(self, request, form):
         form.get_prepared_form()
-        y_S, y_I = get_dots(form)
+        y_S, y_I = self._prepare_plot_data(form.days, get_dots(form))
         return render(
             request,
             self.template_name,
@@ -37,11 +37,10 @@ class SISView(EpidemicModelView):
 class SISVView(SISView):
     success_url = reverse_lazy('sis:vital')
     vital = True
-    about = 'fbvehbvishe'
 
     def _get_response_data(self, request, form):
         form.get_prepared_form()
-        y_S, y_I = get_dots(form, True)
+        y_S, y_I = self._prepare_plot_data(form.days, get_dots(form, True))
         return render(
             request,
             self.template_name,
