@@ -8,3 +8,4 @@ venv
 *.pyc
 *~
 config/media
+db.sqlite3

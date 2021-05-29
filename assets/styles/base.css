@@ -3,6 +3,9 @@
     src: url('../fonts/CaviarDreams_Bold.ttf');
     font-weight: bold;
 }
+html{
+    width: 1900px;
+}
 
 header {
     height: 70px;
@@ -14,7 +17,9 @@ header {
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.75);
     z-index: 9999;
 }
-
+.row{
+    width: 100%;
+}
 .logo {
     width: 100%;
     box-sizing: border-box;
