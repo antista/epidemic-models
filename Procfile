@@ -1,0 +1,1 @@
+web: gunicorn epidemic.config.wsgi --log-file -
