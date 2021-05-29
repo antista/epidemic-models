@@ -52,25 +52,6 @@ class EpidemicModelView(FormView):
             result.append([list(a) for a in zip(range(days), plot)])
         return result
 
-    # def get(self, request, **kwargs):
-    #     """Fill initial form and add values to template."""
-    #     return render(
-    #         request,
-    #         self.template_name,
-    #         self.get_context_dict(self.default_form),
-    #     )
-
-    # def post(self, request, **kwargs):
-    #     """Fill form and add values to template."""
-    #     form = self.form_class(request.POST)
-    #     if form.is_valid():
-    #         return render(
-    #             request,
-    #             self.template_name,
-    #             self.get_context_dict(form),
-    #         )
-    #     return redirect(request.path)
-
     def get(self, request, **kwargs):
         """Fill initial form and add values to template."""
         super().get(request, **kwargs)

@@ -101,8 +101,6 @@ def dD(
         vital: bool = False,
 ) -> float:
     result = seirds.D + coefficients.mu * seirds.I
-    # if vital:
-    #     result += coefficients.death * (seirds.S + seirds.E + seirds.I + seirds.R)
     return result
 
 

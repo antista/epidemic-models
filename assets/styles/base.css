@@ -3,13 +3,25 @@
     src: url('../fonts/CaviarDreams_Bold.ttf');
     font-weight: bold;
 }
-html{
-    width: 1900px;
+
+@media only screen and (max-device-width: 480px) {
+    html {
+        width: 1500px;
+        height: 100%;
+    }
+
+    .schema-image {
+        width: 100%;
+        height: 100%;
+        min-width: 600px;
+    }
 }
 
 header {
     height: 70px;
     top: 0;
+    width: 100%;
+    min-width: 700px;
     background-color: #009B95;
     color: azure;
     font-weight: bold;
@@ -17,13 +29,18 @@ header {
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.75);
     z-index: 9999;
 }
-.row{
+
+.schema-image {
+    max-width: 55vw;
+}
+
+.row {
     width: 100%;
 }
+
 .logo {
-    width: 100%;
+    width: 450px !important;
     box-sizing: border-box;
-    /*border: solid 1px red;*/
     text-align: center;
 }
 
@@ -73,15 +90,13 @@ header {
 }
 
 .plot-container {
-    margin-left: 100px;
-    margin-top: 20px;
-    /*width:1000px;*/
-    /*float:left;*/
+    height: calc(100vh * 0.6);
+    width: calc(100vw * 0.55);
+    min-width: 700px;
 }
 
 .plot {
-    height: 600px;
-    width: 1000px;
+    height: calc(100vh * 0.6);
     position: relative;
 }
 
@@ -93,14 +108,24 @@ header {
 }
 
 .form-container {
-    font-size: 20px;
+    font-size: 17px;
     margin-top: 20px;
     margin-left: 90px;
+    width: 25%;
+    float: left;
+}
+
+.content-container {
+    margin-left: 100px;
+    margin-top: 20px;
+    width: calc(100vw * 0.55);
+    max-width: 80vw;
+    min-width: 700px;
+    float: left;
 }
 
 td {
-    padding-left: 30px !important;
-    /*padding-bottom: 20px !important;*/
+    padding-left: 20px !important;
 }
 
 .help-text {
@@ -110,15 +135,15 @@ td {
 }
 
 input {
-    width: 220px;
+    width: 200px;
 }
 
 .form-card input[type=submit] {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .form-card input[type=reset] {
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 
@@ -127,7 +152,7 @@ input {
 }
 
 .switch-label {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .switch {
@@ -135,6 +160,7 @@ input {
     display: inline-block;
     width: 45px;
     height: 25px;
+    padding-top: 3px;
 }
 
 /* Hide default HTML checkbox */
@@ -160,7 +186,6 @@ input {
 .slider-desc {
     font-size: 18px;
     justify-content: center;
-    margin-top: -2px;
 }
 
 .slider:before {
@@ -201,11 +226,11 @@ input:checked + .slider:before {
 }
 
 .number-for-range {
-    width: 80px !important;
+    width: 70px !important;
 }
 
 .about {
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 40px;
     margin-left: 130px;
     margin-right: 130px;
@@ -213,23 +238,24 @@ input:checked + .slider:before {
 
 .about-info {
     margin-left: 10px;
-    margin-top: 25px;
-    font-size: 18px;
+    margin-top: 20px;
+    font-size: 16px;
 }
 
 .about-model-header {
-    font-size: 30px;
+    font-size: 26px;
     font-weight: bold;
     margin-top: 50px;
     margin-left: 30px;
 }
+
 .about-header {
-    font-size: 30px;
+    font-size: 26px;
     font-weight: bold;
     margin-top: 50px;
     margin-left: 150px;
 }
 
 th {
-    width: 175px !important;
+    width: 150px !important;
 }

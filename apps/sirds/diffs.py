@@ -79,8 +79,6 @@ def dD(
         vital: bool = False,
 ) -> float:
     result = sirds.D + coefficients.mu * sirds.I
-    # if vital:
-    #     result += coefficients.death * (sirds.S + sirds.I + sirds.R)
     return result
 
 
