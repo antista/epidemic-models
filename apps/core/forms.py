@@ -9,7 +9,7 @@ class CoefficientField(forms.DecimalField):
             min_value=0,
             max_value=1,
             decimal_places=3,
-            widget=forms.NumberInput(attrs={'type': 'range', 'step': 0.005}),
+            widget=forms.NumberInput(attrs={'type': 'range', 'step': 0.001}),
             **kwargs
         )
 

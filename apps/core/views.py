@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, FormView
+from django.shortcuts import redirect, render
+from django.views.generic import FormView, TemplateView
 
 
 class AboutView(TemplateView):
