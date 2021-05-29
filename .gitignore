@@ -8,4 +8,3 @@ venv
 *.pyc
 *~
 config/media
-*settings.py
