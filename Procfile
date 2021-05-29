@@ -1,1 +1,1 @@
-web: gunicorn epidemic.config.wsgi --log-file -
+web: gunicorn epidemic-models.config.wsgi --log-file -
