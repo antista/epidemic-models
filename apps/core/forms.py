@@ -40,11 +40,11 @@ class EpidemicForm(forms.Form):
 
 class VitalForm(EpidemicForm):
     birth = CoefficientField(
-        label='Рождаемость',
+        label='Рождаемость (λ)',
         help_text='Коэффициент рождаемости популяции, умноженный на 100',
     )
     death = CoefficientField(
-        label='Смертность',
+        label='Смертность (ω)',
         help_text='Коэффициент смертности популяции, умноженный на 100',
     )
 
